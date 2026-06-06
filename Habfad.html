@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Habfad Hotel - Luxury in Itori</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#1a1c1b",
+            "secondary": "#5f5e5e",
+            "surface-container-highest": "#e4e2e2",
+            "tertiary": "#5d5f5d",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#c8c6c5",
+            "on-error-container": "#93000a",
+            "surface-container": "#efeded",
+            "surface-dim": "#dbdad9",
+            "on-surface-variant": "#5a4136",
+            "on-tertiary-container": "#2f3130",
+            "outline": "#8e7164",
+            "on-background": "#1b1c1c",
+            "tertiary-container": "#989997",
+            "on-error": "#ffffff",
+            "inverse-surface": "#303031",
+            "tertiary-fixed-dim": "#c6c7c5",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#fbf9f8",
+            "on-surface": "#1b1c1c",
+            "error-container": "#ffdad6",
+            "primary": "#a04100",
+            "inverse-on-surface": "#f2f0f0",
+            "surface-container-high": "#e9e8e7",
+            "primary-fixed": "#ffdbcc",
+            "on-secondary-container": "#636262",
+            "on-tertiary-fixed-variant": "#454746",
+            "on-primary-container": "#572000",
+            "on-secondary-fixed": "#1c1b1b",
+            "secondary-container": "#e2dfde",
+            "on-primary-fixed": "#351000",
+            "outline-variant": "#e2bfb0",
+            "on-tertiary": "#ffffff",
+            "surface": "#fbf9f8",
+            "surface-container-low": "#f5f3f3",
+            "surface-variant": "#e4e2e2",
+            "surface-tint": "#a04100",
+            "secondary-fixed": "#e5e2e1",
+            "on-primary-fixed-variant": "#7a3000",
+            "on-secondary-fixed-variant": "#474746",
+            "inverse-primary": "#ffb693",
+            "primary-fixed-dim": "#ffb693",
+            "tertiary-fixed": "#e2e3e1",
+            "primary-container": "#ff6b00",
+            "background": "#fbf9f8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "20px", "section-gap": "120px", "gutter": "24px",
+            "container-max": "1280px", "margin-desktop": "64px", "unit": "8px"
+          },
+          "fontFamily": {
+            "headline-md": ["Playfair Display"], "caption": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Playfair Display"],
+            "display-lg": ["Playfair Display"], "display-lg-mobile": ["Playfair Display"]
+          },
+          "fontSize": {
+            "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+            "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["48px", {"lineHeight": "56px", "fontWeight": "600"}],
+            "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #vapi-modal-overlay { display: none !important; }
+    #vapi-modal-overlay.active { display: flex !important; }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased overflow-x-hidden">
+
+<!-- =============================================
+     VAPI AI ASSISTANT MODAL
+     (hidden by default, opens on button click)
+     ============================================= -->
+<div id="vapi-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div id="vapi-modal">
+    <!-- Close Button -->
+    <button id="vapi-modal-close" aria-label="Close">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#5f5e5e;">close</span>
+    </button>
+
+    <!-- Avatar -->
+    <div id="vapi-avatar">
+      <span class="material-symbols-outlined" style="font-size:48px;color:#fff;">smart_toy</span>
+    </div>
+
+    <!-- Status -->
+    <p id="vapi-status">Available 24/7</p>
+
+    <!-- Title & Description -->
+    <h3>Talk to Jace</h3>
+    <p>Jace is Habfad Hotel's AI assistant. Ask about rooms, make a booking, or request a food delivery — all by voice.</p>
+
+    <!-- Sound Wave (shows when speaking) -->
+    <div id="vapi-wave">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Buttons -->
+    <button id="vapi-call-btn">
+      <span class="material-symbols-outlined">call</span>
+      Start Conversation
+    </button>
+    <button id="vapi-end-btn">
+      <span class="material-symbols-outlined">call_end</span>
+      End Call
+    </button>
+  </div>
+</div>
+
+<!-- =============================================
+     HEADER / NAV
+     ============================================= -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-margin-desktop py-4 max-w-container-max mx-auto nav-transition bg-transparent" id="main-nav">
+  <div class="flex items-center gap-unit">
+    <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Habfad Hotel</span>
+  </div>
+  <!-- Desktop Navigation -->
+  <nav class="hidden md:flex items-center gap-8">
+    <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md hover:scale-105 transition-transform duration-200" href="#about">About</a>
+      <a class="text-on-primary dark:text-on-primary-fixed hover:text-primary transition-colors font-label-md text-label-md hover:scale-105 transition-transform duration-200" href="#rooms-suites">Our Rooms &amp; Suites</a>
+    <a class="text-on-primary dark:text-on-primary-fixed hover:text-primary transition-colors font-label-md text-label-md hover:scale-105 transition-transform duration-200" href="#dining-section">Dining</a>
+    <a class="text-on-primary dark:text-on-primary-fixed hover:text-primary transition-colors font-label-md text-label-md hover:scale-105 transition-transform duration-200" href="#gallery">Gallery</a>
+    <a class="text-on-primary dark:text-on-primary-fixed hover:text-primary transition-colors font-label-md text-label-md hover:scale-105 transition-transform duration-200" href="#location">Find Us</a>
+  </nav>
+  <!-- Mobile Menu Toggle -->
+  <div class="flex items-center gap-4">
+    <button aria-label="Menu" class="md:hidden text-on-primary">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =============================================
+       HERO SECTION
+       ============================================= -->
+  <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Habfad Hotel Luxury Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfM1hjuTxw9TQFj16EdG4n_yQ3Krcc3l-91EhjHwSZiiol5hMbjKiWBDr1x8eN8eDJIfbFC5Tk-M6VBKcPiBC3dBRCFNjCfDonuorV1d9OBbkl9uCbmp0UkBXLGc-VAUoBgnmll8wz4gnyEWLWXnBYlyRV2wWkE24ckAoNKfSeQgAtFrBSID5gaRyjb-JcZc1yGs7U13qpWpivEPijJxHjBsCXdSlrifG9tMWQzBQQGovmuioernnct-QewFZ4zt9nO27WtKkTdKiY">
+      <div class="absolute inset-0 hero-overlay bg-black/40"></div>
+    </div>
+    <div class="relative z-10 container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+      <div class="flex flex-col items-center max-w-4xl mx-auto space-y-6">
+        <h1 class="text-white font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg leading-tight drop-shadow-lg">Welcome to Habfad Hotel</h1>
+        <p class="text-white/90 font-body-lg text-body-lg max-w-2xl drop-shadow-md">
+          Your Premium Comfort in the Heart of Itori, Abeokuta, Ogun State, Nigeria.
+        </p>
+        <div class="pt-8">
+          <a class="group relative inline-flex items-center gap-3 bg-primary-container text-on-primary px-10 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-[1.02] active:scale-95 shadow-xl hover:shadow-primary-container/20" href="#booking">
+            Book Your Stay
+            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+          <span class="material-symbols-outlined text-white text-3xl opacity-70">expand_more</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       ABOUT SECTION
+       ============================================= -->
+  <section class="py-24 bg-white" id="about">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="relative">
+          <img alt="Habfad Hotel Interior" class="w-full h-auto rounded-2xl shadow-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr4RjS8ZiVdg7L4fxmu1OkoiZ91OUuxkKq69MMT1b5IZMTu5Pcn195GCUG2575RnrLtu_q8ahC9UCj3ETaY9DBkcgjT2_22X-ZrARI6BH0coIL7ZBkie9-dYSI2vhuQfYiXFh5YRhac3orVB6qFKEQ_1y97aHlKbSAK-lDHNiBvyfZ6u_gSEs5Uz5JfUIwGt6mo4zjbVq6Hm0CRPYUrUp8kcNIla_VmjtC-9hCRwoOygMLoosl3aI8H9hdHSOfXH32964SN-QWzHMc">
+        </div>
+        <div class="flex flex-col space-y-6">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">About Habfad Hotel</h2>
+            <div class="w-[60px] h-1 bg-primary-container rounded-full"></div>
+          </div>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Habfad Hotel is a premier hospitality destination in the heart of Itori, Abeokuta, Ogun State. We offer a perfect blend of modern comfort, timeless elegance, and warm Nigerian hospitality, ensuring every guest enjoys an unparalleled stay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       ROOMS & SUITES
+       ============================================= -->
+  <section class="py-24 bg-white" id="rooms-suites">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="text-center mb-16">
+        <h2 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-[#000000] mb-4">Our Rooms &amp; Suites</h2>
+        <div class="w-16 h-1 bg-[#FF6B00] mx-auto rounded-full"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Standard Room -->
+        <div class="group bg-white rounded-lg shadow-md border border-transparent hover:border-[#FF6B00] transition-all duration-300 overflow-hidden">
+          <div class="overflow-hidden h-72">
+            <img alt="Standard Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOKmfdF5KGvMWb35GOTU70CEzD1zWv4Q9ta6TmZE4O2KESXgbBVTJmbgijl-kRK80PkXzk_PdqZtowJlQOGPv9VV53vvsixGqnY5mzVChKeu4q071wAN_3Nme1NRqH5g_7cyGaZcWxRAcIau-Gd8vR6NnZP9_YmPobIX_t7g9fdwicYylwVeDvZvhxIJmEzvcxZBE1chWBsy-gJLv6RbcPH2KsX3AGSvZ1efcxsaixDLSjad3IzOq5d6Jf9OgNPcLDo0q0QBLqYIa7">
+          </div>
+          <div class="p-6 flex flex-col space-y-3">
+            <h3 class="font-headline-md text-2xl font-bold">Standard Room</h3>
+            <p class="font-body-md text-on-surface-variant line-clamp-2">A perfect blend of modern comfort and functional elegance for a relaxing stay.</p>
+            <p class="text-[#FF6B00] font-bold text-xl">₦25,000 <span class="text-sm text-secondary font-normal">/ night</span></p>
+          </div>
+        </div>
+        <!-- Deluxe Room -->
+        <div class="group bg-white rounded-lg shadow-md border border-transparent hover:border-[#FF6B00] transition-all duration-300 overflow-hidden">
+          <div class="overflow-hidden h-72">
+            <img alt="Deluxe Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLusLcM1uPqpe9LBuPw0b6aNDIwADtYNVIFlPVToNBRgoUHX9WJYyUkpQcAiMUNwYo8UUvcFWVtiqC2SrxzqMQJpehptdBFFi1GfckuXAO7jVCBs975y7cJ3Y7TEafzqFlmZTMLdUNy1pKI3IIlFOWbyaFTVtOu1NV2ZbPlQERpglJUD3LeLvyVMtvkQ9kiaMBzAFsCV_iaRiElXgAyQ3887XqSf0XDFxdDU1IdpyGZUJ0B_ECFVvSfmXmFO">
+          </div>
+          <div class="p-6 flex flex-col space-y-3">
+            <h3 class="font-headline-md text-2xl font-bold">Deluxe Room</h3>
+            <p class="font-body-md text-on-surface-variant line-clamp-2">Experience premium luxury with sophisticated decor and expanded seating areas.</p>
+            <p class="text-[#FF6B00] font-bold text-xl">₦28,000 <span class="text-sm text-secondary font-normal">/ night</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       DINING SECTION
+       ============================================= -->
+  <section class="py-24 bg-white" id="dining-section">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex flex-col space-y-6 order-2 lg:order-1">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">Dining at Habfad</h2>
+            <div class="w-[60px] h-1 bg-primary-container rounded-full"></div>
+          </div>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Indulge in a culinary journey at our signature restaurant in Itori, Abeokuta. We serve a delightful array of authentic Nigerian dishes alongside curated continental meals, all prepared with the freshest ingredients to satisfy every palate in a sophisticated, welcoming atmosphere.
+          </p>
+        </div>
+        <div class="relative order-1 lg:order-2">
+          <img alt="Elegant Restaurant Interior at Habfad Hotel" class="w-full h-auto rounded-2xl shadow-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAStOP0pUG7007U6O777BCtBiKFjmvlpJ-mpEm4xRURqopQWxq2P9lHwyA_uvdS_IbREa5CUFVJzaLYTFP_dvfhbcPjvp-ibrDhFduDl5JGMTQ9HGE7e-iNSxRXUe5nDo5stnM7iPzv-ay5evNySQw-GU4-cWcPxB4MALkfTAZBohg2QXFW3LcX483Nns2F2rJ1ygjNrHmfZ7wW6QPWHE9yeUMpClTpYwCUa_9Ujhv5dPc5ba3yAfv2X8AAwyYxmse6U6uDmBCP-WTC">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       AMENITIES
+       ============================================= -->
+  <section class="py-24 bg-[#FF6B00]" id="amenities">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="text-center mb-16">
+        <h2 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-white font-bold mb-4">What We Offer</h2>
+        <div class="w-16 h-1 bg-white mx-auto rounded-full"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-y-12 gap-x-8 grid-cols-1">
+        <div class="flex flex-col items-center text-center space-y-4 group">
+          <div class="w-16 h-16 rounded-full border-2 border-white/30 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+            <span class="material-symbols-outlined text-white text-4xl">room_service</span>
+          </div>
+          <span class="text-white font-label-md text-label-md uppercase tracking-wider">24/7 Room Service</span>
+        </div>
+        <div class="flex flex-col items-center text-center space-y-4 group">
+          <div class="w-16 h-16 rounded-full border-2 border-white/30 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+            <span class="material-symbols-outlined text-white text-4xl">restaurant</span>
+          </div>
+          <span class="text-white font-label-md text-label-md uppercase tracking-wider">Restaurant &amp; Bar</span>
+        </div>
+        <div class="flex flex-col items-center text-center space-y-4 group">
+          <div class="w-16 h-16 rounded-full border-2 border-white/30 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+            <span class="material-symbols-outlined text-white text-4xl">local_parking</span>
+          </div>
+          <span class="text-white font-label-md text-label-md uppercase tracking-wider">Secure Parking</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       GALLERY
+       ============================================= -->
+  <section class="py-24 bg-white" id="gallery">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="text-center mb-16">
+        <h2 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-on-surface mb-4">A Glimpse of Habfad</h2>
+        <div class="w-16 h-1 bg-[#FF6B00] mx-auto rounded-full"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="group relative overflow-hidden rounded-lg cursor-pointer shadow-md">
+          <img alt="Hotel Exterior" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCATvIQIaKE4HR1xioqV9UbRE4C1xvsLQYAJJ3g5r2JvqQOKo-171aHMb842q5XyHLkqLhCSDcOj6QDY9ppk5SslBXkOxAW37yv2Jh07uVwyEwmkNRdJndnpjUFbsYlXJkJPDT09j9LkEsQyH_OiRnSTiucaqLErvn3NJNeZcYrLFQszR-be7AqgHJGBV-agVHNeuA_PJoW7_TFeWSVPTnnHSVmKt41tywE8N7UqTOsVMnavmMdaJfbgZpP2nbaTkrB0dc8jVPBN4YH">
+          <div class="absolute inset-0 bg-[#FF6B00]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-5xl">zoom_in</span>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-lg cursor-pointer shadow-md">
+          <img alt="Luxury Pool" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc-7W5YmjfhPXGgp9lwMCN99eCzU5YcZsM99h2-3yFGLnaDN9JVHxVaR4PMy4lykumg8QCZxUxQ_UPtGuu1mZrA58XDGm5Qmm_xo6nTNUdIBDQpGj374abxuM-3zvXHg5hSEKB88wLwMoXPjRpE71ibHRpVwULvYCUySZYlVOTGPs-jeCn9_4DmbMDIIQM4s4e4poE5MUfTX0V7fyBRvMwP0ySjZz9QQRBq34DsfVW2ZT5guYrt--KIs_S_28oA2sgnIHn__WferHT">
+          <div class="absolute inset-0 bg-[#FF6B00]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-5xl">zoom_in</span>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-lg cursor-pointer shadow-md">
+          <img alt="Event Hall" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_ZDqZNuAB5_1nVF5InoKAUcalaGY-s-lS-92Qt_cRlyqwZl-9kW3CViql5mHg1zZuZ6XYrIuBiMNFNdV4bIfxdxOJuw7jLUSq9Cp0yKMMNQOT5gpoKsZYKnJTPH6nbbPFoXjaiw1M87Y4s7VKks6HxLqFZufr8rgRr4rwrZqvCU9ABcYbzbiaFWU8a0KsCaVvGsnyef3357e9nA75DFqLPnkwLtvM2R_1sgzFgufQeP9rK9t0UjbHOsIXdIPDbDovlf4GmJbVwXz4">
+          <div class="absolute inset-0 bg-[#FF6B00]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-5xl">zoom_in</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       BOOKING / AI ASSISTANT SECTION
+       ============================================= -->
+  <section class="py-24 bg-white" id="booking">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="text-center mb-16">
+        <h2 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-on-surface mb-4">Book Your Stay</h2>
+        <div class="w-16 h-1 bg-[#FF6B00] mx-auto rounded-full"></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- AI Assistant Card -->
+        <div class="bg-surface-container rounded-2xl p-8 md:p-12 shadow-xl border border-outline-variant flex flex-col items-center justify-center text-center h-[500px] space-y-8">
+          <div class="w-24 h-24 rounded-full bg-[#FF6B00] flex items-center justify-center text-white shadow-lg animate-bounce">
+            <span class="material-symbols-outlined text-5xl">smart_toy</span>
+          </div>
+          <div class="space-y-4">
+            <h3 class="font-headline-md text-3xl text-on-surface">Ready to Book?</h3>
+            <p class="font-body-lg text-on-surface-variant max-w-sm mx-auto">Our AI Assistant Jace is standing by to help you find the perfect room and complete your reservation in seconds.</p>
+          </div>
+          <!-- THIS IS THE MAIN CALL BUTTON -->
+          <button id="main-call-btn" onclick="openVapiModal()" class="group flex items-center gap-4 bg-[#FF6B00] text-white px-10 py-5 rounded-full font-bold text-xl transition-all hover:scale-105 active:scale-95 shadow-xl hover:shadow-[#FF6B00]/30">
+            <span class="material-symbols-outlined text-3xl">call</span>
+            <span>Call our AI Assistant</span>
+          </button>
+          <p class="text-xs text-secondary uppercase tracking-widest font-bold">Available 24/7 • Instant Booking</p>
+        </div>
+
+        <!-- Benefits -->
+        <div class="flex flex-col space-y-8">
+          <div>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Why Book With Us?</h3>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Experience a seamless booking process tailored to your needs. Our AI assistant makes it easier than ever to secure your premium comfort in Itori.</p>
+          </div>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[#FF6B00]">verified</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Instant Confirmation</h4>
+                <p class="text-on-surface-variant">Get immediate booking details and peace of mind.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[#FF6B00]">payments</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Best Rate Guaranteed</h4>
+                <p class="text-on-surface-variant">We offer the most competitive prices when you book directly.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[#FF6B00]">support_agent</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">24/7 Digital Support</h4>
+                <p class="text-on-surface-variant">Our assistant is always here to help with your inquiries.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       LOCATION / FIND US
+       ============================================= -->
+  <section class="py-24 bg-white" id="location">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="w-full h-[450px] lg:h-full min-h-[450px] rounded-xl overflow-hidden shadow-lg border border-surface-variant">
+          <img alt="Map of Itori, Abeokuta, Ogun State, Nigeria" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKnDgfkXFVzlGK2Z-wZMGX_sXMKgRykhgWXl7Pj8WhUZzY8fJVoJ3FQfsZHqZmKz1VgMWChpY6ju8sgVc7Vc2z51SQUIdvU9axFiyiMO6KyE-mafE93RbSJ8C8phJlJnOZ7aKdPD4FaJkC8vzBJcI6SGWSjZPdVNT3cRrs2no5_obcWxjE11RII-6LtDecme4UczViK7Ez94TTW79f-YB7iZgSNcySSgsq7CD5g9P0gKMqLfDaPLisO-0EdM8ZOR3D_9rjb8Qf7KGT">
+        </div>
+        <div class="flex flex-col space-y-10">
+          <div>
+            <h2 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-on-surface mb-4">Find Us</h2>
+            <div class="w-16 h-1 bg-[#FF6B00] rounded-full"></div>
+          </div>
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-[#FF6B00]">location_on</span>
+              <p class="font-body-md text-on-surface-variant">Itori, Abeokuta, Ogun State, Nigeria</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-[#FF6B00]">call</span>
+              <p class="font-body-md text-on-surface-variant">+234 800 000 0000</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-[#FF6B00]">mail</span>
+              <p class="font-body-md text-on-surface-variant">info@habfadhotel.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =============================================
+     FOOTER
+     ============================================= -->
+<footer class="bg-[#1a1a1a] text-white py-16 px-6 md:px-margin-desktop">
+  <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div class="flex flex-col space-y-4">
+      <h3 class="font-headline-md text-headline-md text-[#FF6B00]">Habfad Hotel</h3>
+      <p class="font-body-md text-body-md opacity-90">Comfort. Elegance. Nigeria.</p>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <h4 class="font-headline-md text-xl font-semibold">Quick Links</h4>
+      <nav class="flex flex-col space-y-2">
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#">Home</a>
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#">About</a>
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#rooms-suites">Rooms</a>
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#dining-section">Dining</a>
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#gallery">Gallery</a>
+        <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#location">Contact</a>
+      </nav>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <h4 class="font-headline-md text-xl font-semibold">Contact Us</h4>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[#FF6B00]">location_on</span>
+        <p class="font-body-md">Itori, Abeokuta, Ogun State</p>
+      </div>
+      <div class="flex gap-4 pt-2">
+        <a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FF6B00] hover:border-[#FF6B00] transition-all" href="#"><span class="material-symbols-outlined text-sm">facebook</span></a>
+        <a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FF6B00] hover:border-[#FF6B00] transition-all" href="#"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
+        <a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FF6B00] hover:border-[#FF6B00] transition-all" href="#"><span class="material-symbols-outlined text-sm">close</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-container-max mx-auto mt-16 pt-8 border-t border-white/10 text-center">
+    <p class="font-body-md text-sm opacity-60">© 2025 Habfad Hotel. All Rights Reserved. | Designed by Nexill</p>
+  </div>
+</footer>
+
+<!-- =============================================
+     VAPI SDK
+     ============================================= -->
+<script>
+  var vapiInstance = null;
+
+  // ── Replace these two values ──────────────────
+ const VAPI_PUBLIC_KEY   = "e4e0e6a9-eda5-4e73-9ea4-3d637a9bce6a";
+const VAPI_ASSISTANT_ID = "cec98e5a-18c7-47b4-aeed-11f94642081f";
+  // ─────────────────────────────────────────────
+
+  // Load Vapi SDK
+  (function (d, t) {
+    var g = document.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function () {
+      vapiInstance = window.vapiSDK.run({
+        apiKey: VAPI_PUBLIC_KEY,
+        assistant: VAPI_ASSISTANT_ID,
+        config: {
+          position: "bottom-right",
+          offset: "40px",
+          width: "50px",
+          height: "50px",
+        },
+      });
+
+      // Vapi event listeners
+      vapiInstance.on("call-start", function () {
+        setStatus("🟢 Connected", "listening");
+        document.getElementById("vapi-call-btn").style.display = "none";
+        document.getElementById("vapi-end-btn").classList.add("visible");
+        document.getElementById("vapi-wave").classList.add("active");
+      });
+
+      vapiInstance.on("call-end", function () {
+        setStatus("Call ended", "");
+        document.getElementById("vapi-call-btn").style.display = "flex";
+        document.getElementById("vapi-end-btn").classList.remove("visible");
+        document.getElementById("vapi-wave").classList.remove("active");
+        document.getElementById("vapi-avatar").className = "";
+        setTimeout(closeVapiModal, 1500);
+      });
+
+      vapiInstance.on("speech-start", function () {
+        setStatus("🎙️ Jace is speaking...", "speaking");
+      });
+
+      vapiInstance.on("speech-end", function () {
+        setStatus("🎧 Listening...", "listening");
+      });
+
+      vapiInstance.on("error", function (e) {
+        console.error("Vapi error:", e);
+        setStatus("⚠️ Connection error", "");
+      });
+    };
+  })(document, "script");
+
+  // ── Modal Controls ────────────────────────────
+  function openVapiModal() {
+    document.getElementById("vapi-modal-overlay").classList.add("active");
+    setStatus("Available 24/7", "");
+  }
+
+  function closeVapiModal() {
+    document.getElementById("vapi-modal-overlay").classList.remove("active");
+    if (vapiInstance) vapiInstance.stop();
+    document.getElementById("vapi-call-btn").style.display = "flex";
+    document.getElementById("vapi-end-btn").classList.remove("visible");
+    document.getElementById("vapi-wave").classList.remove("active");
+    document.getElementById("vapi-avatar").className = "";
+  }
+
+  function setStatus(text, avatarClass) {
+    document.getElementById("vapi-status").textContent = text;
+    var avatar = document.getElementById("vapi-avatar");
+    avatar.className = avatarClass || "";
+  }
+
+  // Start call button
+  document.getElementById("vapi-call-btn").addEventListener("click", function () {
+    if (vapiInstance) {
+      setStatus("⏳ Connecting...", "");
+      vapiInstance.start();
+    }
+  });
+
+  // End call button
+  document.getElementById("vapi-end-btn").addEventListener("click", function () {
+    if (vapiInstance) vapiInstance.stop();
+  });
+
+  // Close modal button
+  document.getElementById("vapi-modal-close").addEventListener("click", closeVapiModal);
+
+  // Close on overlay click
+  document.getElementById("vapi-modal-overlay").addEventListener("click", function (e) {
+    if (e.target === this) closeVapiModal();
+  });
+</script>
+
+<!-- =============================================
+     SCROLL & SMOOTH SCROLL SCRIPTS
+     ============================================= -->
+<script>
+  // Header background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    const links = nav.querySelectorAll('nav a');
+    if (window.scrollY > 50) {
+      nav.classList.remove('bg-transparent');
+      nav.classList.add('bg-white', 'shadow-md', 'backdrop-blur-sm');
+      links.forEach(link => {
+        if (!link.classList.contains('text-primary')) {
+          link.classList.remove('text-on-primary');
+          link.classList.add('text-on-surface');
+        }
+      });
+    } else {
+      nav.classList.add('bg-transparent');
+      nav.classList.remove('bg-white', 'shadow-md', 'backdrop-blur-sm');
+      links.forEach(link => {
+        if (!link.classList.contains('text-primary')) {
+          link.classList.add('text-on-primary');
+          link.classList.remove('text-on-surface');
+        }
+      });
+    }
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
