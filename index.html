@@ -161,7 +161,7 @@
   </nav>
   <!-- Mobile Menu Toggle -->
   <div class="flex items-center gap-4">
-    <button aria-label="Menu" class="md:hidden text-on-primary">
+    <button id="mobile-menu-btn" aria-label="Menu" class="md:hidden text-on-primary">
       <span class="material-symbols-outlined">menu</span>
     </button>
   </div>
@@ -459,6 +459,13 @@
         <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#gallery">Gallery</a>
         <a class="font-body-md hover:text-[#FF6B00] transition-colors" href="#location">Contact</a>
       </nav>
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 px-6 flex flex-col gap-4 z-50">
+       <a class="text-on-surface font-label-md text-label-md" href="#rooms-suites">About</a>
+       <a class="text-on-surface font-label-md text-label-md" href="#dining-section">Dining</a>
+       <a class="text-on-surface font-label-md text-label-md" href="#rooms-suites">Our Rooms & Suites</a>
+       <a class="text-on-surface font-label-md text-label-md" href="#gallery">Gallery</a>
+       <a class="text-on-surface font-label-md text-label-md" href="#location">Find Us</a>
+ </div>
     </div>
     <div class="flex flex-col space-y-4">
       <h4 class="font-headline-md text-xl font-semibold">Contact Us</h4>
@@ -622,6 +629,18 @@ const VAPI_ASSISTANT_ID = "cec98e5a-18c7-47b4-aeed-11f94642081f";
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
+    });
+  });
+    // Mobile menu toggle
+  document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+
+// Close mobile menu when a link is clicked
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.add('hidden');
     });
   });
 </script>
